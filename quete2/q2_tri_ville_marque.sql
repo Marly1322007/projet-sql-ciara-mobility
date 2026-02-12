@@ -1,4 +1,4 @@
--- Tri par ville puis par marque
 SELECT *
-FROM vehicules
-ORDER BY ville ASC, marque ASC;
+FROM vehicule
+WHERE etat = 'disponible'
+ORDER BY ville, marque;
