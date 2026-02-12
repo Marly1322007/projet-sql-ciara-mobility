@@ -1,4 +1,3 @@
--- Clients classés par ordre alphabétique
 SELECT *
-FROM clients
-ORDER BY LastName ASC;
+FROM client
+ORDER BY nom;
