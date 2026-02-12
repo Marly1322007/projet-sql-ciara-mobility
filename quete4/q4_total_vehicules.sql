@@ -1,3 +1,2 @@
--- Nombre total de véhicules
-SELECT COUNT(*) AS TotalVehicules
-FROM vehicules;
+SELECT COUNT(*) AS nombre_total_vehicules
+FROM vehicule;
