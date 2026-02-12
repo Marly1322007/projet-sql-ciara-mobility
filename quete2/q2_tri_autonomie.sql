@@ -1,4 +1,3 @@
--- Tri des véhicules par autonomie décroissante
 SELECT *
-FROM vehicules
-ORDER BY autonomie DESC;
+FROM vehicule
+ORDER BY autonomie_km DESC;
