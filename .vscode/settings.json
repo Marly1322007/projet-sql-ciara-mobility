@@ -6,7 +6,7 @@
             "server": "localhost",
             "port": 5432,
             "driver": "PostgreSQL",
-            "name": "ciara_M",
+            "name": "ciara-M",
             "database": "postgres",
             "username": "postgres",
             "password": "1234"
