@@ -27,7 +27,6 @@ La base contient :
 ---
 
 ## Structure du projet
-
 ```
 projet-sql-ciara-mobility/
 ├── README.md
@@ -158,49 +157,29 @@ COUNT, AVG, SUM pour les calculs courants. TO_CHAR pour formater les dates. EXTR
 
 ---
 
-## D. Difficultés rencontrées
+## D. Difficultés rencontrées et solutions
 
-### Jointure double sur la même table
+### Marly (Quêtes 1 & 3)
 
-Pour afficher la station de départ et la station d'arrivée dans la même requête, on devait joindre la table station deux fois. La solution c'est d'utiliser des alias différents :
+**Jointure double sur station :** On devait afficher départ ET arrivée de la même table, donc on a utilisé des alias pour joindre `station` deux fois.
 
-```sql
-JOIN station AS station_depart ON ...
-LEFT JOIN station AS station_arrivee ON ...
-```
+**Gestion des valeurs NULL :** Les locations en cours n'ont pas de station d'arrivée. On a utilisé LEFT JOIN pour garder toutes les locations et `IS NULL` pour tester les valeurs nulles.
 
-On utilise LEFT JOIN pour l'arrivée parce qu'elle peut être NULL pour les locations en cours.
+### Mariam (Quêtes 2 & 4)
 
-### WHERE vs HAVING
+**Différence WHERE et HAVING :** On voulait filtrer les clients avec plusieurs locations mais `WHERE COUNT(*) >= 2` ne marchait pas. WHERE filtre avant GROUP BY, HAVING filtre après les agrégations.
 
-On a essayé WHERE COUNT(- ) >= 2 pour trouver les clients avec au moins 2 locations, ça ne marchait pas. COUNT ne peut pas s'utiliser dans WHERE, seulement dans HAVING après le GROUP BY.
+**Colonnes dans GROUP BY :** On affichait nom et prénom mais on groupait uniquement par id_client, ce qui causait une erreur. On a ajouté nom et prénom dans le GROUP BY pour résoudre le problème.
 
-### Véhicules jamais loués
+### Ensemble (Quête 5)
 
-Pour trouver les véhicules qui n'ont jamais été loués, on fait un LEFT JOIN entre vehicule et location, puis on filtre sur les lignes où la location est NULL :
+**Véhicules jamais loués :** On a utilisé LEFT JOIN puis WHERE IS NULL pour trouver les véhicules sans location.
 
-```sql
-FROM vehicule
-LEFT JOIN location ON vehicule.id_vehicule = location.id_vehicule
-WHERE location.id_location IS NULL
-```
-
-### Taux d'utilisation réel
-
-Au début on utilisait etat = 'en location' pour calculer le taux d'utilisation, mais ça donnait toujours 1 par ville parce que c'est une valeur statique dans la table. On a changé en comptant les locations dont date_fin est NULL, ce qui donne le vrai nombre de véhicules actuellement loués.
-
-### Soustraction de dates sous PostgreSQL
-
-On a eu une erreur en faisant CURRENT_DATE - MAX(date_debut) > 90 dans le HAVING. La bonne syntaxe est :
-
-```sql
-HAVING MAX(l.date_debut) < CURRENT_DATE - INTERVAL '90 days'
-```
+**Top 3 correct :** LIMIT seul prenait 3 au hasard, on a ajouté ORDER BY avant pour trier d'abord.
 
 ---
 
 ## E. Schéma de la base
-
 ```
 ┌──────────────┐         ┌─────────────┐
 │    CLIENT    │         │   STATION   │
@@ -242,7 +221,7 @@ HAVING MAX(l.date_debut) < CURRENT_DATE - INTERVAL '90 days'
 
 ## F. Fichiers complémentaires
 
-### base_ciara_FINALE.sql
+### création_base_de_données.sql
 
 C'est notre base de données complète. Le fichier crée les 4 tables, insère les 12 stations, les 48 véhicules, les 40 clients et les 500 locations. Les index sont aussi créés pour améliorer les performances.
 
