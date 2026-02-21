@@ -7,7 +7,29 @@ SELECT
     station_arrivee.nom AS station_arrivee,
     station_arrivee.ville AS ville_arrivee
 FROM location
-INNER JOIN station AS station_depart 
-    ON location.id_station_depart = station_depart.id_station
-LEFT JOIN station AS station_arrivee 
-    ON location.id_station_arrivee = station_arrivee.id_station;
+INNER JOIN station AS station_depart ON location.id_station_depart = station_depart.id_station
+LEFT JOIN station AS station_arrivee ON location.id_station_arrivee = station_arrivee.id_station;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
