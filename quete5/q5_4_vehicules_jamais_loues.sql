@@ -1,3 +1,4 @@
+-- Véhicules jamais loués
 SELECT 
     vehicule.id_vehicule,
     vehicule.marque,
