@@ -136,7 +136,10 @@ La table location est au centre du schéma. Elle relie les clients, les véhicul
 - Une station peut accueillir plusieurs départs et arrivées (relation 1 vers N)
 
 Points importants : date_fin peut être NULL si la location est en cours, id_station_arrivee aussi. On teste toujours ces cas avec IS NULL et jamais avec = NULL.
-
+Cette structure centralisée autour de location permet d'interroger n'importe 
+quel croisement client/véhicule/station en une seule requête avec jointures, 
+ce qui est essentiel pour le suivi opérationnel de la flotte cIAra 
+(savoir qui loue quoi, où, et depuis quand).
 ---
 
 ## C. Choix techniques
