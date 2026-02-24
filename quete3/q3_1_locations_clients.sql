@@ -1,3 +1,4 @@
+-- Locations avec les infos client
 SELECT 
     location.id_location,
     location.date_debut,

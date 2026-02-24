@@ -1,3 +1,4 @@
+-- Véhicules disponibles
 SELECT *
 FROM vehicule
-WHERE etat = 'disponible'; 
+WHERE etat = 'disponible';

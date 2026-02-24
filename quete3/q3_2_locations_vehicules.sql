@@ -1,3 +1,4 @@
+-- Locations avec les infos du véhicule
 SELECT 
     location.id_location,
     location.date_debut,
