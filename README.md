@@ -244,4 +244,4 @@ On a utilisé Git avec GitHub pour travailler en parallèle sans se marcher dess
 - **Fréquence des commits** : on a commité à chaque fin de session de travail, ou dès qu'une quête ou un fichier était terminé (ex : "création de la base données, mise en place des quetes q1,q3", "ajout de la première partie de la quete 5").
 - **Répartition** : chacune travaillait sur sa propre branche de fichiers (Marly sur quête 1, 3, STATISTIQUES — Mariam sur quête 2, 4, TESTS), ce qui évitait les conflits.
 - **Conflits** : on n'a pas eu de conflits majeurs car on ne modifiait pas les mêmes fichiers en même temps. Pour le README et la base, on se coordonnait avant de pusher.
-- **Nommage** : en début de projet certains commits ont des noms courts ("nn"), on a amélioré ça ensuite avec des messages plus explicites.
+- **Nommage** : on a utilisé des messages de commit explicites décrivant précisément l'action menée .
