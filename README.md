@@ -30,7 +30,7 @@ La base contient :
 ```
 projet-sql-ciara-mobility/
 ├── README.md
-├── base_ciara_FINALE.sql
+├── Base_de_données/création_base_de_données.sql
 ├── quete1/
 │   ├── q1.1_tous_vehicules.sql
 │   ├── q1.2_vehicules_disponibles.sql
@@ -135,11 +135,21 @@ La table location est au centre du schéma. Elle relie les clients, les véhicul
 - Un véhicule peut être loué plusieurs fois (relation 1 vers N)
 - Une station peut accueillir plusieurs départs et arrivées (relation 1 vers N)
 
-Points importants : date_fin peut être NULL si la location est en cours, id_station_arrivee aussi. On teste toujours ces cas avec IS NULL et jamais avec = NULL.
+- Points importants : date_fin peut être NULL si la location est en cours, id_station_arrivee aussi. On teste toujours ces cas avec IS NULL et jamais avec = NULL.
 Cette structure centralisée autour de location permet d'interroger n'importe 
 quel croisement client/véhicule/station en une seule requête avec jointures, 
 ce qui est essentiel pour le suivi opérationnel de la flotte cIAra 
 (savoir qui loue quoi, où, et depuis quand).
+
+#### Pertinence métier
+
+Chaque décision de conception répond à un besoin concret de cIAra Mobility :
+
+- `date_fin` accepte NULL : une location en cours n'a pas encore de date de fin. Cela permet de suivre en temps réel les véhicules actuellement loués sans bloquer le système.
+- `id_station_arrivee` accepte NULL pour la même raison : un véhicule en trajet n'a pas encore de destination enregistrée.
+- Le champ `etat` sur vehicule (disponible / en location / en maintenance) permet à cIAra de connaître la disponibilité de la flotte sans requête complexe sur la table location.
+- L'email UNIQUE sur client garantit qu'un utilisateur ne peut pas créer deux comptes, essentiel pour la facturation et la fidélisation.
+- La table `location` comme table centrale évite la duplication : un même client ou véhicule peut apparaître dans des dizaines de locations sans que ses données soient répétées.
 ---
 
 ## C. Choix techniques
@@ -157,6 +167,17 @@ GROUP BY sert à regrouper les données pour faire des calculs. HAVING filtre ap
 ### Fonctions utilisées
 
 COUNT, AVG, SUM pour les calculs courants. TO_CHAR pour formater les dates. EXTRACT pour récupérer le trimestre ou l'année. MODE pour trouver le type de véhicule préféré d'un client. INTERVAL pour les calculs de durée.
+
+#### Détail des requêtes complexes
+
+**q3_3** : Jointure double sur `station`. On doit afficher départ ET arrivée depuis la même table.
+On utilise INNER JOIN pour le départ (toujours présent) et LEFT JOIN pour l'arrivée (peut être NULL si location en cours).
+
+**q5_4** : Véhicules jamais loués. LEFT JOIN + WHERE IS NULL plutôt que NOT IN, car NOT IN échoue silencieusement si la sous-requête retourne un NULL — ce qui éliminerait tous les résultats.
+
+**q5_3** : HAVING COUNT(*) >= 2 et non WHERE COUNT(*) >= 2. WHERE s'applique avant le GROUP BY et ne peut pas accéder aux agrégats. HAVING s'applique après.
+
+**q4_4 / q5_3** : nom et prenom sont dans le GROUP BY car toute colonne affichée dans le SELECT qui n'est pas dans une fonction d'agrégation doit y figurer — règle SQL stricte.
 
 ---
 
