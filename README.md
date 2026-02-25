@@ -93,13 +93,13 @@ projet-sql-ciara-mobility/
 ## Avancement
 
 - [x] Base de données créée par nos soins
-- [x] Quête 1 - Marly
-- [x] Quête 2 - Mariam
-- [x] Quête 3 - Marly
-- [x] Quête 4 - Mariam
-- [x] Quête 5 - Ensemble
-- [x] STATISTIQUES.sql - Marly
-- [x] TESTS.sql - Mariam
+- [x] Quête 1 
+- [x] Quête 2
+- [x] Quête 3 
+- [x] Quête 4 
+- [x] Quête 5 
+- [x] STATISTIQUES.sql 
+- [x] TESTS.sql 
 - [x] Rapport d'analyse
 
 ---
@@ -261,8 +261,40 @@ Des requêtes de vérification pour s'assurer que la base est cohérente. On vé
 ### Gestion de version (Git/GitHub)
 
 On a utilisé Git avec GitHub pour travailler en parallèle sans se marcher dessus.
+- **Fréquence des commits** : on a commité à chaque fin de session de travail, ou dès qu'une quête ou un fichier était terminé (ex : "création de la base de données, mise en place des quêtes q1,q3", "ajout de la première partie de la quête 5"). Nous avons effectué plusieurs commits car le projet a été construit progressivement, avec des corrections et améliorations successives jusqu’à obtenir la version finale stable.
 
-- **Fréquence des commits** : on a commité à chaque fin de session de travail, ou dès qu'une quête ou un fichier était terminé (ex : "création de la base données, mise en place des quetes q1,q3", "ajout de la première partie de la quete 5").
 - **Répartition** : chacune travaillait sur sa propre branche de fichiers (Marly sur quête 1, 3, STATISTIQUES — Mariam sur quête 2, 4, TESTS), ce qui évitait les conflits.
+
 - **Conflits** : on n'a pas eu de conflits majeurs car on ne modifiait pas les mêmes fichiers en même temps. Pour le README et la base, on se coordonnait avant de pusher.
+
 - **Nommage** : on a utilisé des messages de commit explicites décrivant précisément l'action menée .
+
+## Environnement et méthodologie de travail
+
+### Environnement technique
+- SGBD : PostgreSQL
+- Interface : pgAdmin 4
+- Éditeur : Visual Studio Code
+- Gestion de version : Git / GitHub
+
+### Méthodologie
+Nous avons adopté une approche progressive :
+- Lecture attentive des consignes
+- Rédaction des requêtes étape par étape
+- Tests réguliers
+- Corrections successives jusqu’à obtention d’une version stable
+- Consultation mutuelle avant les commits et push afin d’éviter les conflits
+
+### Apports pédagogiques
+
+Ce projet a été réalisé grâce aux connaissances acquises lors du projet **piscine SQL**, ainsi que durant les cours.  
+Les exercices pratiques de la piscine nous ont permis de maîtriser les bases du SQL (SELECT, WHERE, JOIN, GROUP BY), ce qui nous a aidées à construire des requêtes plus complexes dans ce projet.
+---
+
+# Conclusion
+
+Ce projet nous a permis d’appliquer les compétences acquises lors de la piscine SQL, notamment la modélisation, les jointures et les agrégations.
+
+Nous avons conçu une base de données complète répondant à des besoins métiers réels, tout en travaillant de manière structurée en binôme avec Git.
+
+Ce travail représente une mise en pratique concrète de nos compétences en SQL.
